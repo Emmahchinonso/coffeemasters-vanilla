@@ -18,15 +18,19 @@ export class MenuPage extends HTMLElement {
     const template = document.getElementById("menu-page-template");
     const content = template.content.cloneNode(true);
     this.root.appendChild(content);
+    this._onMenuChange = () => this.render();
 
-    window.addEventListener("app:menuDataChanged", () => {
-      this.render();
-    });
+    window.addEventListener("app:menuDataChanged", this._onMenuChange);
+    this.render();
+  }
+
+  disconnectedCallback() {
+    window.removeEventListener("app:menuDataChanged", this._onMenuChange);
   }
 
   render() {
+    const menu = this.root.querySelector("#menu");
     if (app.store.menu) {
-      const menu = this.root.querySelector("#menu");
       menu.innerHTML = "";
       for (let category of app.store.menu) {
         const liCategory = document.createElement("li");
