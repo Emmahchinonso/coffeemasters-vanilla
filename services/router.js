@@ -28,10 +28,10 @@ const Router = {
         pageElement = document.createElement("order-page");
         break;
       default:
-        if (path.startsWith("/product/")) {
+        if (path.startsWith("/product-")) {
           pageElement = document.createElement("details-page");
           const paramId = path.substring(
-            location.pathname.lastIndexOf("/") + 1,
+            location.pathname.lastIndexOf("-") + 1,
           );
           pageElement.dataset.productId = paramId;
         }
