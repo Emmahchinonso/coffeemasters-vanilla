@@ -44,6 +44,9 @@ const Router = {
       window.scrollX = 0;
       window.scrollY = 0;
       console.log(`Navigating to ${path}`);
+    } else {
+      mainElement.innerHTML = "";
+      mainElement.innerHTML = "Oops! Page not found";
     }
   },
 };
